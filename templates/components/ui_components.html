@@ -1,0 +1,153 @@
+{% macro global_header(title) -%}
+<header data-component="global-header">
+    <h1>{{ title }}</h1>
+</header>
+{%- endmacro %}
+
+{% macro navigation_menu(items, active_path="/") -%}
+<nav aria-label="Main navigation" data-component="navigation-menu">
+    <ul>
+        {% for item in items %}
+        <li>
+            <a href="{{ item.href }}" {% if item.href == active_path %}aria-current="page"{% endif %}>
+                {{ item.label }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+{%- endmacro %}
+
+{% macro global_footer(text) -%}
+<footer data-component="global-footer">
+    <p>{{ text }}</p>
+</footer>
+{%- endmacro %}
+
+{% macro page_header(title, subtitle="") -%}
+<header data-component="page-header">
+    <h2>{{ title }}</h2>
+    {% if subtitle %}
+    <p>{{ subtitle }}</p>
+    {% endif %}
+</header>
+{%- endmacro %}
+
+{% macro section_block(id="", title="") -%}
+<section {% if id %}id="{{ id }}"{% endif %} data-component="section">
+    {% if title %}
+    <h3>{{ title }}</h3>
+    {% endif %}
+    {{ caller() }}
+</section>
+{%- endmacro %}
+
+{% macro card_panel(title="") -%}
+<article data-component="card-panel">
+    {% if title %}
+    <h4>{{ title }}</h4>
+    {% endif %}
+    {{ caller() }}
+</article>
+{%- endmacro %}
+
+{% macro text_block(title, body) -%}
+<div data-component="text-block">
+    <h5>{{ title }}</h5>
+    <p>{{ body }}</p>
+</div>
+{%- endmacro %}
+
+{% macro data_table(caption, headers, rows) -%}
+<table data-component="data-table">
+    {% if caption %}
+    <caption>{{ caption }}</caption>
+    {% endif %}
+    <thead>
+    <tr>
+        {% for header in headers %}
+        <th scope="col">{{ header }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+    <tr>
+        {% for value in row %}
+        <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{%- endmacro %}
+
+{% macro data_list(title, items, ordered=False) -%}
+<section data-component="data-list">
+    <h5>{{ title }}</h5>
+    {% if ordered %}
+    <ol>
+        {% for item in items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <ul>
+        {% for item in items %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</section>
+{%- endmacro %}
+
+{% macro chart_placeholder(chart_id, title, points=[]) -%}
+<figure id="{{ chart_id }}" data-component="chart" data-points="{{ points|join(',') }}">
+    <figcaption>{{ title }}</figcaption>
+    <canvas aria-label="{{ title }}" role="img"></canvas>
+</figure>
+{%- endmacro %}
+
+{% macro button(button_id, label, button_type="button") -%}
+<button id="{{ button_id }}" type="{{ button_type }}" data-component="button">
+    {{ label }}
+</button>
+{%- endmacro %}
+
+{% macro modal(modal_id, title, body_text, confirm_label="Confirm", cancel_label="Cancel") -%}
+<dialog id="{{ modal_id }}" data-component="modal">
+    <h4>{{ title }}</h4>
+    <p>{{ body_text }}</p>
+    <div>
+        <button type="button" data-modal-close>{{ cancel_label }}</button>
+        <button type="button">{{ confirm_label }}</button>
+    </div>
+</dialog>
+{%- endmacro %}
+
+{% macro notification(notification_id, message, level="info") -%}
+<section id="{{ notification_id }}" role="status" data-component="notification" data-level="{{ level }}">
+    <p>{{ message }}</p>
+    <button type="button" data-notification-close>Dismiss</button>
+</section>
+{%- endmacro %}
+
+{% macro loading_state(state_id, message="Loading...") -%}
+<section id="{{ state_id }}" role="status" aria-live="polite" data-component="loading-state">
+    <p>{{ message }}</p>
+</section>
+{%- endmacro %}
+
+{% macro empty_state(state_id, title="No data available", description="Add data to continue.") -%}
+<section id="{{ state_id }}" data-component="empty-state">
+    <h5>{{ title }}</h5>
+    <p>{{ description }}</p>
+</section>
+{%- endmacro %}
+
+{% macro error_state(state_id, title="Something went wrong", description="Please retry.") -%}
+<section id="{{ state_id }}" role="alert" data-component="error-state">
+    <h5>{{ title }}</h5>
+    <p>{{ description }}</p>
+</section>
+{%- endmacro %}

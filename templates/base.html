@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Frontend{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+{% import "components/ui_components.html" as ui %}
+
+{{ ui.global_header("ARGH, on Web") }}
+{{ ui.navigation_menu(nav_items|default([]), active_path|default("/")) }}
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+{{ ui.global_footer("ARgh frontend") }}
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

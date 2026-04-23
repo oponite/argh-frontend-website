@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% import "components/ui_components.html" as ui %}
+{{ ui.page_header("UI Component Showcase", "Unstyled component scaffolding for structural, data, interaction, and feedback states.") }}
+
+{% call ui.section_block("page-level-components", "Page-Level Components") %}
+    {% call ui.card_panel("Projection Form Card") %}
+    <form id="projection-form">
+        <label for="away-team">Away Team</label>
+        <input id="away-team" name="away_team" type="text" placeholder="Boston Celtics" required>
+
+        <label for="home-team">Home Team</label>
+        <input id="home-team" name="home_team" type="text" placeholder="New York Knicks" required>
+
+        <label for="bookie-total">Bookie Total</label>
+        <input id="bookie-total" name="bookie_total" type="number" step="0.1" placeholder="221.5" required>
+
+        {{ ui.button("submit-btn", "Get Projection", "submit") }}
+    </form>
+    <pre id="output">Enter two teams and the bookie total, then submit.</pre>
+    {% endcall %}
+{% endcall %}
+
+{% call ui.section_block("data-components", "Data Components") %}
+    {{ ui.text_block("Typography Example", "This is a text/typography component that can hold body copy.") }}
+    {{ ui.data_table("Team Snapshot", ["Team", "Pace", "3PT%"], [["Boston Celtics", "99.8", "36.9"], ["New York Knicks", "97.3", "35.8"]]) }}
+    {{ ui.data_list("Top Inputs", ["Away team", "Home team", "Bookie total"]) }}
+    {{ ui.chart_placeholder("projection-chart", "Projected Totals Chart", [218, 220, 223, 221, 224]) }}
+{% endcall %}
+
+{% call ui.section_block("interaction-components", "Interaction Components") %}
+    {{ ui.button("open-modal-button", "Open Modal") }}
+    {{ ui.notification("example-notification", "Projection generated successfully.", "success") }}
+    {{ ui.modal("example-modal", "Projection Details", "Review model assumptions before placing any bet.", "Understood", "Close") }}
+{% endcall %}
+
+{% call ui.section_block("state-feedback-components", "State & Feedback Components") %}
+    {{ ui.loading_state("example-loading", "Loading current game metrics...") }}
+    {{ ui.empty_state("example-empty", "No historical games", "This team has no recent-game records to display.") }}
+    {{ ui.error_state("example-error", "Data source unavailable", "Could not load stats from the provider.") }}
+{% endcall %}
+{% endblock %}

@@ -13,7 +13,6 @@ if (form && output && submitButton) {
     const payload = {
       away_team: form.away_team?.value?.trim() ?? "",
       home_team: form.home_team?.value?.trim() ?? "",
-      bookie_total: form.bookie_total?.value?.trim() ?? "",
     };
 
     submitButton.disabled = true;

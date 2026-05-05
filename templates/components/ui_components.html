@@ -1,9 +1,11 @@
+<!-- Global header -->
 {% macro global_header(title) -%}
 <header data-component="global-header">
     <h1>{{ title }}</h1>
 </header>
 {%- endmacro %}
 
+<!-- Navigation Menu (with current page indicator) -->
 {% macro navigation_menu(items, active_path="/") -%}
 <nav aria-label="Main navigation" data-component="navigation-menu">
     <ul>
@@ -18,12 +20,14 @@
 </nav>
 {%- endmacro %}
 
+<!-- Global footer -->
 {% macro global_footer(text) -%}
 <footer data-component="global-footer">
     <p>{{ text }}</p>
 </footer>
 {%- endmacro %}
 
+<!-- Page header with subtitle option -->
 {% macro page_header(title, subtitle="") -%}
 <header data-component="page-header">
     <h2>{{ title }}</h2>
@@ -33,6 +37,8 @@
 </header>
 {%- endmacro %}
 
+
+<!-- POTENTIAL DELETE -->
 {% macro section_block(id="", title="") -%}
 <section {% if id %}id="{{ id }}"{% endif %} data-component="section">
     {% if title %}
@@ -51,12 +57,14 @@
 </article>
 {%- endmacro %}
 
+<!-- Text component -->
 {% macro text_block(title, body) -%}
 <div data-component="text-block">
     <h5>{{ title }}</h5>
     <p>{{ body }}</p>
 </div>
 {%- endmacro %}
+
 
 {% macro data_table(caption, headers, rows) -%}
 <table data-component="data-table">
